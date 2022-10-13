@@ -59,4 +59,28 @@ class Recipe:
             recipes.append(cls(recipe)) #1.- cls(recipe) creamos la instancia en base al diccionario, 2.- recipes.append agrego esa instancia a la lista recipes
         
         return recipes
+
+    @classmethod
+    def get_by_id(cls, formulario):
+        query = "SELECT recipes.*, first_name FROM recipes LEFT JOIN users ON users.id = recipes.user_id WHERE recipes.id= %(id)s;"
+        result = connectToMySQL('esquema_recetas').query_db(query, formulario)
+        recipe = cls(result[0]) #result[0] = diccionario con todos los datos de la receta; cls() creamos la instancia en base a ese diccionario
+        return recipe
+
+    @classmethod
+    def update(cls, formulario):
+        query = "UPDATE recipes SET name=%(name)s, description=%(description)s, instructions=%(instructions)s, date_made=%(date_made)s, under_30=%(under_30)s WHERE id=%(recipe_id)s "
+        result = connectToMySQL('esquema_recetas').query_db(query, formulario)
+        return result
+
+    @classmethod
+    def delete(cls, formulario):
+        #formulario = {id: 1}
+        query = "DELETE FROM recipes WHERE id = %(id)s"
+        result = connectToMySQL('esquema_recetas').query_db(query, formulario)
+        return result
+
+
+
+    
         

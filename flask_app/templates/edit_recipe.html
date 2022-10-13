@@ -24,22 +24,22 @@
                 </div>
             {% endif %}
         {% endwith %}
-        <form action="/create/recipe" method="post">
+        <form action="/update/recipe" method="post">
             <div class="form-group">
                 <label for="name">Nombre de la Receta</label>
-                <input type="text" id="name" name="name" class="form-control">
+                <input type="text" id="name" name="name" class="form-control" value="{{recipe.name}}">
             </div>
             <div class="form-group">
                 <label for="description">Descripción</label>
-                <textarea id="description" name="description" class="form-control"></textarea>
+                <textarea id="description" name="description" class="form-control">{{recipe.description}}</textarea>
             </div>
             <div class="form-group">
                 <label for="instructions">Instrucciones</label>
-                <textarea id="instructions" name="instructions" class="form-control"></textarea>
+                <textarea id="instructions" name="instructions" class="form-control">{{recipe.instructions}}</textarea>
             </div>
             <div class="form-group">
                 <label for="date_made">Fecha de Creación</label>
-                <input type="date" id="date_made" name="date_made" class="form-control">
+                <input type="date" id="date_made" name="date_made" class="form-control" value="{{recipe.date_made}}">
             </div>
             <div class="form-group">
                 <label>¿Menos de 30 mins?</label>
@@ -50,6 +50,7 @@
                 <label for="under_30NO">NO</label>
             </div>
             <input type="hidden" name="user_id" value="{{session['user_id']}}">
+            <input type="hidden" name="recipe_id" value="{{recipe.id}}">
             <input type="submit" value="Guardar" class="btn btn-success">
         </form>           
         </div>
